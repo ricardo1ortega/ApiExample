@@ -1,0 +1,263 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ApiExample</name>
+    </assembly>
+    <members>
+        <member name="M:ApiExample.Controllers.PropertyController.Post(ApiExample.Core.Request.CreatePropertyRequest)">
+            <summary>
+            Create property
+            </summary>
+            <param name="request">Request data</param>
+            <returns>The id of the property that was created</returns>
+            <response code="200">The property id</response>
+            <response code="400">
+            Status - Error code: meaning. <br></br>
+            400 - Validation error: Some of the fields do not comply with the expected format <br></br>
+            errors: [ { "code": "ValidationError", "message": "Some validation error.", "path": "/property" }] <br></br>
+            </response>
+            <response code="500">A server error occurred in the service</response>
+        </member>
+        <member name="F:ApiExample.Core.Models.BaseApiResponse.ResponseCodes.Ok">
+            <summary>
+            Ok
+            </summary>
+        </member>
+        <member name="F:ApiExample.Core.Models.BaseApiResponse.ResponseCodes.Created">
+            <summary>
+            Created
+            </summary>
+        </member>
+        <member name="F:ApiExample.Core.Models.BaseApiResponse.ResponseCodes.ValidationError">
+            <summary>
+            ValidationError
+            </summary>
+        </member>
+        <member name="F:ApiExample.Core.Models.BaseApiResponse.ResponseCodes.Unauthorized">
+            <summary>
+            Unauthorized
+            </summary>
+        </member>
+        <member name="F:ApiExample.Core.Models.BaseApiResponse.ResponseCodes.NotFound">
+            <summary>
+            NotFound
+            </summary>
+        </member>
+        <member name="F:ApiExample.Core.Models.BaseApiResponse.ResponseCodes.Duplicated">
+            <summary>
+            Duplicated
+            </summary>
+        </member>
+        <member name="F:ApiExample.Core.Models.BaseApiResponse.ResponseCodes.NotManaged">
+            <summary>
+            NotManaged
+            </summary>
+        </member>
+        <member name="F:ApiExample.Core.Models.BaseApiResponse.ResponseCodes.Locked">
+            <summary>
+            Locked
+            </summary>
+        </member>
+        <member name="F:ApiExample.Core.Models.BaseApiResponse.ResponseCodes.MaxProducts">
+            <summary>
+            Maximum number of products
+            </summary>
+        </member>
+        <member name="F:ApiExample.Core.Models.BaseApiResponse.ResponseCodes.TooManyTries">
+            <summary>
+            Too many tries
+            </summary>
+        </member>
+        <member name="F:ApiExample.Core.Models.BaseApiResponse.ResponseCodes.ServerError">
+            <summary>
+            ServerError
+            </summary>
+        </member>
+        <member name="P:ApiExample.Core.Models.BaseApiResponse.Status">
+            <summary>
+            All good!
+            </summary>
+            <example>200</example>
+        </member>
+        <member name="P:ApiExample.Core.Models.BaseApiResponse.TraceId">
+            <summary>
+            Trace of the current request
+            </summary>
+        </member>
+        <member name="P:ApiExample.Core.Models.BaseApi410ResponseExample.Status">
+            <summary>
+            410 - Not Managed.
+            The requested process could not be processed.
+            </summary>
+            <value>410</value>
+            <example>410</example>
+        </member>
+        <member name="P:ApiExample.Core.Models.BaseApi400ResponseExample.Status">
+            <summary>
+            400 - Validation Error.
+            Some of the fields do not comply with the expected format.
+            </summary>
+            <example>400</example>
+        </member>
+        <member name="P:ApiExample.Core.Models.BaseApi404ResponseExample.Status">
+            <summary>
+            404 - Not found.
+            The requested resource cannot be found.
+            </summary>
+            <example>404</example>
+        </member>
+        <member name="P:ApiExample.Core.Models.BaseApi500ResponseExample.Status">
+            <summary>
+            500 - Server error.
+            A server error occurred.
+            </summary>
+            <example>500</example>
+        </member>
+        <member name="P:ApiExample.Core.Request.OwnerRequest.Name">
+            <summary>
+            Name of the Owner
+            </summary>
+        </member>
+        <member name="P:ApiExample.Core.Request.OwnerRequest.Address">
+            <summary>
+            Address of the Owner
+            </summary>
+        </member>
+        <member name="P:ApiExample.Core.Request.OwnerRequest.Photo">
+            <summary>
+            Photo of the Owner
+            </summary>
+        </member>
+        <member name="P:ApiExample.Core.Request.OwnerRequest.Birthday">
+            <summary>
+            Birthday of the Owner
+            </summary>
+        </member>
+        <member name="P:ApiExample.Core.Request.PropertyRequest.Name">
+            <summary>
+            Name of the Property
+            </summary>
+        </member>
+        <member name="P:ApiExample.Core.Request.PropertyRequest.Address">
+            <summary>
+            Address of the Property
+            </summary>
+        </member>
+        <member name="P:ApiExample.Core.Request.PropertyRequest.Price">
+            <summary>
+            Price of the Property without decimals
+            </summary>
+        </member>
+        <member name="P:ApiExample.Core.Request.PropertyRequest.CodeInternal">
+            <summary>
+            Code for internal reference of the Property
+            </summary>
+        </member>
+        <member name="P:ApiExample.Core.Request.PropertyRequest.Year">
+            <summary>
+            Year of the Property
+            </summary>
+        </member>
+        <member name="P:ApiExample.Core.Request.PropertyRequest.File">
+            <summary>
+            File of the image of the Property
+            </summary>
+        </member>
+        <member name="P:ApiExample.Db.Models.Owner.Name">
+            <summary>
+            Name of the Owner
+            </summary>
+        </member>
+        <member name="P:ApiExample.Db.Models.Owner.Address">
+            <summary>
+            Address of the Owner
+            </summary>
+        </member>
+        <member name="P:ApiExample.Db.Models.Owner.Photo">
+            <summary>
+            Photo of the Owner
+            </summary>
+        </member>
+        <member name="P:ApiExample.Db.Models.Owner.Birthday">
+            <summary>
+            Birthday of the Owner
+            </summary>
+        </member>
+        <member name="P:ApiExample.Db.Models.Property.Name">
+            <summary>
+            Name of the Property
+            </summary>
+        </member>
+        <member name="P:ApiExample.Db.Models.Property.Address">
+            <summary>
+            Address of the Property
+            </summary>
+        </member>
+        <member name="P:ApiExample.Db.Models.Property.Price">
+            <summary>
+            Price of the Property without decimals
+            </summary>
+        </member>
+        <member name="P:ApiExample.Db.Models.Property.CodeInternal">
+            <summary>
+            Code for internal reference of the Property
+            </summary>
+        </member>
+        <member name="P:ApiExample.Db.Models.Property.Year">
+            <summary>
+            Year of the Property
+            </summary>
+        </member>
+        <member name="P:ApiExample.Db.Models.Property.IdOwner">
+            <summary>
+            IdOwner of the Property
+            </summary>
+        </member>
+        <member name="P:ApiExample.Db.Models.PropertyImage.IdProperty">
+            <summary>
+            IdProperty for the image
+            </summary>
+        </member>
+        <member name="P:ApiExample.Db.Models.PropertyImage.File">
+            <summary>
+            File of the image of the Property
+            </summary>
+        </member>
+        <member name="P:ApiExample.Db.Models.PropertyImage.Enabled">
+            <summary>
+            Check if the image is Enabled
+            </summary>
+        </member>
+        <member name="P:ApiExample.Db.Models.PropertyTrace.Name">
+            <summary>
+            Name of the Property
+            </summary>
+        </member>
+        <member name="P:ApiExample.Db.Models.PropertyTrace.DateSale">
+            <summary>
+            Date of sale of the Property
+            </summary>
+        </member>
+        <member name="P:ApiExample.Db.Models.PropertyTrace.Value">
+            <summary>
+            Value of the Property without decimals
+            </summary>
+        </member>
+        <member name="P:ApiExample.Db.Models.PropertyTrace.Tax">
+            <summary>
+            Taxes of the Property without decimals
+            </summary>
+        </member>
+        <member name="P:ApiExample.Db.Models.PropertyTrace.IdProperty">
+            <summary>
+            IdProperty for the trace
+            </summary>
+        </member>
+        <member name="P:ApiExample.Resources.CreatePropertyResponse.Id">
+            <summary>
+            Property Id
+            </summary>
+            <example>3195436353543</example>
+        </member>
+    </members>
+</doc>
