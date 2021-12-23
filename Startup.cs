@@ -1,5 +1,6 @@
 using ApiExample.Core.Extensions;
 using ApiExample.Core.Models;
+using ApiExample.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
@@ -47,9 +48,13 @@ namespace ApiExample
                 });
 
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+
+            var jwtTokenConfig = Configuration.GetSection("jwtTokenConfig").Get<JwtTokenConfig>();
+            
             services.AddOpenApiDocument();
             services.AddDbContext();
             services.AddBusinessServices();
+            services.AddInfrastructure(jwtTokenConfig);
             services.AddMappingProfiles();
             services.AddHealthChecks();
 
@@ -73,6 +78,7 @@ namespace ApiExample
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

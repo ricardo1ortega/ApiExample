@@ -22,5 +22,6 @@ namespace ApiExample.Db
         public IMongoCollection<Property> Property => _db.GetCollection<Property>("Property");
         public IMongoCollection<PropertyTrace> PropertyTrace => _db.GetCollection<PropertyTrace>("PropertyTrace");
         public IMongoCollection<PropertyImage> PropertyImage => _db.GetCollection<PropertyImage>("PropertyImage");
+        public IMongoCollection<User> User => _db.GetCollection<User>("User");
     }
 }

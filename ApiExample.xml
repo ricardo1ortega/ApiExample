@@ -4,6 +4,29 @@
         <name>ApiExample</name>
     </assembly>
     <members>
+        <member name="M:ApiExample.Controllers.AccountController.Login(ApiExample.Core.Request.LoginRequest)">
+            <summary>
+            Login user
+            </summary>
+            <param name="request">Request data</param>
+            <returns>The login result</returns>
+            <response code="200">LoginResult</response>
+            <response code="400">
+            Status - Error code: meaning. <br></br>
+            400 - Validation error: Some of the fields do not comply with the expected format <br></br>
+            errors: [ { "code": "ValidationError", "message": "Some validation error.", "path": "/property" }] <br></br>
+            </response>
+            <response code="500">A server error occurred in the service</response>
+        </member>
+        <member name="M:ApiExample.Controllers.AccountController.Save(ApiExample.Core.Request.LoginRequest)">
+            <summary>
+            Save a user
+            </summary>
+            <param name="request">Request data</param>
+            <returns>Ok</returns>
+            <response code="200">Ok</response>
+            <response code="500">A server error occurred in the service</response>
+        </member>
         <member name="M:ApiExample.Controllers.PropertyController.Post(ApiExample.Core.Request.CreatePropertyRequest)">
             <summary>
             Create property
@@ -99,6 +122,13 @@
             </summary>
             <example>400</example>
         </member>
+        <member name="P:ApiExample.Core.Models.BaseApi401ResponseExample.Status">
+            <summary>
+            404 - Unauthorized.
+            The user is Unauthorized to use the resource
+            </summary>
+            <example>404</example>
+        </member>
         <member name="P:ApiExample.Core.Models.BaseApi404ResponseExample.Status">
             <summary>
             404 - Not found.
@@ -162,6 +192,14 @@
             <summary>
             File of the image of the Property
             </summary>
+        </member>
+        <member name="M:ApiExample.Db.Context.UserContext.hashPassword(System.String,System.String)">
+            <summary>
+            Funcion que hace hash con el guid y la password aleatoria
+            </summary>
+            <param name="enteredPass"></param>
+            <param name="userGuid"></param>
+            <returns></returns>
         </member>
         <member name="P:ApiExample.Db.Models.Owner.Name">
             <summary>
@@ -251,6 +289,21 @@
         <member name="P:ApiExample.Db.Models.PropertyTrace.IdProperty">
             <summary>
             IdProperty for the trace
+            </summary>
+        </member>
+        <member name="P:ApiExample.Db.Models.User.Username">
+            <summary>
+            Username for login
+            </summary>
+        </member>
+        <member name="P:ApiExample.Db.Models.User.Password">
+            <summary>
+            Password for login
+            </summary>
+        </member>
+        <member name="P:ApiExample.Db.Models.User.Guid">
+            <summary>
+            Guid for user
             </summary>
         </member>
         <member name="P:ApiExample.Resources.CreatePropertyResponse.Id">

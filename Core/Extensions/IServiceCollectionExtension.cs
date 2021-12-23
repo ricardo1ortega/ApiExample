@@ -1,14 +1,18 @@
 ﻿using ApiExample.Core.Mappers;
 using ApiExample.Db;
 using ApiExample.Db.Context;
+using ApiExample.Infrastructure;
 using ApiExample.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ApiExample.Core.Extensions
@@ -44,7 +48,7 @@ namespace ApiExample.Core.Extensions
 
             services.AddTransient<PropertyContext>();
             services.AddTransient<ServiceContext>();
-
+            services.AddTransient<UserContext>();
 
             return services;
         }
@@ -52,6 +56,37 @@ namespace ApiExample.Core.Extensions
         public static IServiceCollection AddBusinessServices(this IServiceCollection services)
         {
             services.AddTransient<PropertyService>();
+            services.AddTransient<IAccountService, AccountService>();
+            
+
+            return services;
+        }
+
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, JwtTokenConfig jwtTokenConfig)
+        {
+            services.AddSingleton(jwtTokenConfig);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = true;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidIssuer = jwtTokenConfig.Issuer,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtTokenConfig.Secret)),
+                    ValidAudience = jwtTokenConfig.Audience,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.FromMinutes(1)
+                };
+            });
+            services.AddSingleton<IJwtAuthManager, JwtAuthManager>();
+            services.AddHostedService<JwtRefreshTokenCache>();
 
             return services;
         }

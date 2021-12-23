@@ -2,6 +2,7 @@
 using ApiExample.Core.Request;
 using ApiExample.Resources;
 using ApiExample.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -12,6 +13,7 @@ namespace ApiExample.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [Authorize]
     [Produces("application/json")]
     public class PropertyController : ControllerBase
     {
@@ -41,6 +43,7 @@ namespace ApiExample.Controllers
         [ProducesResponseType(typeof(BaseApi400ResponseExample), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(BaseApi404ResponseExample), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(BaseApi500ResponseExample), StatusCodes.Status500InternalServerError)]
+        [Authorize]
         public async Task<ActionResult<CreatePropertyResponse>> Post([FromBody] CreatePropertyRequest request)
         {
             try

@@ -27,6 +27,18 @@ namespace ApiExample.Core.Models
         [DefaultValue(400)]
         public int Status { get; set; } = 400;
     }
+
+    public class BaseApi401ResponseExample
+    {
+        /// <summary>
+        /// 404 - Unauthorized.
+        /// The user is Unauthorized to use the resource
+        /// </summary>
+        /// <example>404</example>
+        [DefaultValue(401)]
+        public int Status { get; set; }
+    }
+
     public class BaseApi404ResponseExample
     {
         /// <summary>
