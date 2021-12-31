@@ -8,7 +8,16 @@ using System.Threading.Tasks;
 
 namespace ApiExample.Db
 {
-    public class ServiceContext
+    public interface IServiceContext
+    {
+        IMongoCollection<Owner> Owner { get; }
+        IMongoCollection<Property> Property { get; }
+        IMongoCollection<PropertyTrace> PropertyTrace { get; }
+        IMongoCollection<PropertyImage> PropertyImage { get; }
+        IMongoCollection<User> User { get; }
+
+    }
+    public class ServiceContext : IServiceContext
     {
         private IMongoDatabase _db { get; }
         public ServiceContext(DbSettings config,

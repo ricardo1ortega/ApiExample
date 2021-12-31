@@ -9,8 +9,8 @@ namespace ApiExample.Db.Context
 {
     public class PropertyContext
     {
-        private ServiceContext _db { get; set; }
-        public PropertyContext(ServiceContext db)
+        private IServiceContext _db { get; set; }
+        public PropertyContext(IServiceContext db)
         {
             _db = db;
         }

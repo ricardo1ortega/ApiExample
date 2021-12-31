@@ -9,8 +9,8 @@ namespace ApiExample.Db.Context
 {
     public class UserContext
     {
-        private ServiceContext _db { get; set; }
-        public UserContext(ServiceContext db)
+        private IServiceContext _db { get; set; }
+        public UserContext(IServiceContext db)
         {
             _db = db;
         }
