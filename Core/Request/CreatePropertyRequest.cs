@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,8 +8,8 @@ namespace ApiExample.Core.Request
 {
     public class CreatePropertyRequest
     {
-        public OwnerRequest owner { get; set; }
-        public PropertyRequest property { get; set; }
+        public OwnerRequest Owner { get; set; }
+        public PropertyRequest Property { get; set; }
     }
 
     public class OwnerRequest
@@ -24,7 +25,7 @@ namespace ApiExample.Core.Request
         public string Address { get; set; }
 
         /// <summary>
-        /// Photo of the Owner
+        /// Base64 representation of the photo of the Owner
         /// </summary>
         public string Photo { get; set; }
 
@@ -62,7 +63,7 @@ namespace ApiExample.Core.Request
         public int Year { get; set; }
 
         /// <summary>
-        /// File of the image of the Property
+        /// Base64 representation of the image of the Property
         /// </summary>
         public string File { get; set; }
     }

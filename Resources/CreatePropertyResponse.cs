@@ -14,4 +14,13 @@ namespace ApiExample.Resources
         /// <example>3195436353543</example>
         public string Id { get; set; }
     }
+
+    public class UpdatePropertyResponse : BaseApiResponse
+    {
+        /// <summary>
+        /// Property Id
+        /// </summary>
+        /// <example>3195436353543</example>
+        public string Id { get; set; }
+    }
 }

@@ -64,11 +64,6 @@ namespace ApiExample.Core.Models
         [DefaultValue(ResponseCodes.Ok)]
         public ResponseCodes Status { get; set; } = ResponseCodes.Ok;
 
-        /// <summary>
-        /// Trace of the current request
-        /// </summary>
-        public string TraceId { get; set; }
-
         public BaseApiResponse ServerError(string message)
         {
             Status = ResponseCodes.ServerError;
@@ -85,12 +80,11 @@ namespace ApiExample.Core.Models
             return this;
         }
 
-
         public static BadRequestObjectResult BadRequestResponse(ActionContext actionContext)
         {
             return new BadRequestObjectResult(new BaseApiResponse
             {
-                TraceId = actionContext.HttpContext.TraceIdentifier,
+                //TraceId = actionContext.HttpContext.TraceIdentifier,
                 Status = ResponseCodes.ValidationError,
                 /*Errors = actionContext.ModelState
                  .Where(modelError => modelError.Value.Errors.Count > 0)
@@ -120,9 +114,42 @@ namespace ApiExample.Core.Models
 
             return response;
         }
-        public TResponse Unauthorize<TResponse>(string field, string message, string mensaje = null) where TResponse : BaseApiResponse
+        
+        public TResponse NotFound<TResponse>(string field) where TResponse : BaseApiResponse
         {
-            return BaseResponse<TResponse>(ResponseCodes.Unauthorized, field, message, mensaje, 0);
+            TResponse response = (TResponse)this;
+
+            response.Status = ResponseCodes.NotFound;
+            /*response.Errors = new List<ErrorApiResponse>
+            {
+                new ErrorApiResponse
+                {
+                    Code = ResponseCodes.NotFound.ToString(),
+                    Message = "The requested resource was not found.",
+                    Path = $"/{field}"
+                }
+            };*/
+
+            return response;
+        }
+
+        public TResponse NotFound<TResponse>(string field, string message, string mensaje) where TResponse : BaseApiResponse
+        {
+            TResponse response = (TResponse)this;
+
+            response.Status = ResponseCodes.NotFound;
+            /*response.Errors = new List<ErrorApiResponse>
+            {
+                new ErrorApiResponse
+                {
+                    Code = ResponseCodes.NotFound.ToString(),
+                    Message = message,
+                    Mensaje = mensaje,
+                    Path = $"/{field}"
+                }
+            };+/
+
+            return response;
         }
 
         public TResponse NotManage<TResponse>(string field, string message) where TResponse : BaseApiResponse

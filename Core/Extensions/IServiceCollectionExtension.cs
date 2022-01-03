@@ -48,6 +48,7 @@ namespace ApiExample.Core.Extensions
                 {
                     {securityScheme, new string[] { }}
                 });
+                c.OperationFilter<SwaggerFileOperationFilter>();
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine("./", xmlFile);
                 c.IncludeXmlComments(xmlFile);
