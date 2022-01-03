@@ -10,7 +10,17 @@ using System.Threading.Tasks;
 
 namespace ApiExample.Db.Context
 {
-    public class PropertyContext
+    public interface IPropertyContext
+    {
+        Property FindPropertyById(string id);
+        ObjectId SaveOwner(Owner owner);
+        ObjectId SaveProperty(Property property);
+        bool UpdateOwner(string id, Owner owner);
+        bool UpdateProperty(string id, Property property);
+        List<Property>  FindAllProperties();
+        List<Property> FindPropertiesByFilter(string f);
+    }
+    public class PropertyContext: IPropertyContext
     {
         private IServiceContext _db { get; set; }
         public PropertyContext(IServiceContext db)
@@ -20,6 +30,7 @@ namespace ApiExample.Db.Context
 
         public Property FindPropertyById(string id)
         {
+            var i = ObjectId.Parse(id);
             var filter = Builders<Property>.Filter.Eq(cr => cr.Id, ObjectId.Parse(id));
             return _db.Property.Find(filter).FirstOrDefault();
         }

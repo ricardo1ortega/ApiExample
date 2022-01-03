@@ -1,4 +1,5 @@
-﻿using ApiExample.Core.Request;
+﻿using ApiExample.Core.Extensions;
+using ApiExample.Core.Request;
 using ApiExample.Db.Context;
 using ApiExample.Db.Models;
 using ApiExample.Resources;
@@ -45,10 +46,10 @@ namespace ApiExample.Services
         #endregion
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
-        private PropertyContext _propertyContext;
+        private IPropertyContext _propertyContext;
         public PropertyService(ILoggerFactory loggerFactory,
                                 IMapper mapper,
-                                PropertyContext propertyContext
+                                IPropertyContext propertyContext
                                 )
         {
             _logger = loggerFactory.CreateLogger<PropertyService>();
@@ -69,12 +70,15 @@ namespace ApiExample.Services
 
         public UpdatePropertyResponse UpdateProperty(UpdatePropertyRequest request)
         {
+            if(request.PropertyId == null || request.Owner.Name.IsNullOrEmpty() || request.Property.Name.IsNullOrEmpty())
+                return new UpdatePropertyResponse().NotFound<UpdatePropertyResponse>("UpdatePropertyRequest");
+
             var p = _propertyContext.FindPropertyById(request.PropertyId);
 
             if(p == null)
                 return new UpdatePropertyResponse().NotFound<UpdatePropertyResponse>("property");
 
-            var owner = _mapper.Map<Owner>(request.Owner);
+            var owner = _mapper.Map<Owner>(request.Owner);  
             var result1 = _propertyContext.UpdateOwner(p.IdOwner, owner);
             var property = _mapper.Map<Property>(request.Property);
             property.IdOwner = p.IdOwner;

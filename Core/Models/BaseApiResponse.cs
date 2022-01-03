@@ -114,7 +114,7 @@ namespace ApiExample.Core.Models
 
             return response;
         }
-        
+
         public TResponse NotFound<TResponse>(string field) where TResponse : BaseApiResponse
         {
             TResponse response = (TResponse)this;
@@ -147,7 +147,7 @@ namespace ApiExample.Core.Models
                     Mensaje = mensaje,
                     Path = $"/{field}"
                 }
-            };+/
+            }*/
 
             return response;
         }
@@ -185,5 +185,8 @@ namespace ApiExample.Core.Models
 
             return response;
         }
+
+
+
     }
 }

@@ -66,7 +66,7 @@ namespace ApiExample.Core.Extensions
                 };
             });
 
-            services.AddTransient<PropertyContext>();
+            services.AddTransient<IPropertyContext, PropertyContext>();
             services.AddTransient<IServiceContext, ServiceContext>();
             services.AddTransient<UserContext>();
 

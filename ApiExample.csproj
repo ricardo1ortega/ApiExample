@@ -9,6 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ApiExample.UnitTest\**" />
+    <Content Remove="ApiExample.UnitTest\**" />
+    <EmbeddedResource Remove="ApiExample.UnitTest\**" />
+    <None Remove="ApiExample.UnitTest\**" />
+  </ItemGroup>
+
+  
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Microsoft.AspNet.WebHelpers" Version="3.2.7" />
